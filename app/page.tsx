@@ -6,7 +6,7 @@ export default function Home() {
   return (
     <Gutter>
       <h1>Payload Auth Example</h1>
-      <p className="text-3xl font-bold underline">
+      <p>
         {'This is a '}
         <Link href="https://payloadcms.com" target="_blank" rel="noopener noreferrer">
           Payload
