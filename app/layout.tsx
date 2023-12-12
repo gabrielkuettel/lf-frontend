@@ -1,7 +1,8 @@
 import { Header } from './_components/Header'
 import { AuthProvider } from './_providers/Auth'
 
-import './_css/app.scss'
+// import './_css/app.scss'
+import './styles/globals.css'
 
 export const metadata = {
   title: 'Payload Auth + Next.js App Router Example',
