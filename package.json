@@ -9,6 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
+    "@headlessui/react": "^1.7.17",
     "escape-html": "^1.0.3",
     "next": "^13.4.8",
     "react": "18.2.0",
