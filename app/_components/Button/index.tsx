@@ -68,7 +68,7 @@ export const Button: React.FC<Props> = ({
     <Element
       href={href}
       className={clsx(
-        'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
+        'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
         appearance === 'primary' && 'bg-indigo-600 hover:bg-indigo-500',
         appearance === 'secondary' && 'bg-white hover:bg-gray-100 text-gray-900',
         appearance === 'default' && 'bg-white hover:bg-gray-100 text-gray-900',
