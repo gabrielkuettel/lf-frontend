@@ -1,14 +1,14 @@
 import React from 'react'
 
-import { Gutter } from '../_components/Gutter'
 import { LogoutPage } from './LogoutPage'
-
-import classes from './index.module.scss'
 
 export default async function Logout() {
   return (
-    <Gutter className={classes.logout}>
-      <LogoutPage />
-    </Gutter>
+    <>
+      <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Log Out</h1>
+      <div className="mt-6">
+        <LogoutPage />
+      </div>
+    </>
   )
 }

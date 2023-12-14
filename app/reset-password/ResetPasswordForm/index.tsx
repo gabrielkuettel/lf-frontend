@@ -9,8 +9,6 @@ import { Input } from '../../_components/Input'
 import { Message } from '../../_components/Message'
 import { useAuth } from '../../_providers/Auth'
 
-import classes from './index.module.scss'
-
 type FormData = {
   password: string
   token: string
@@ -49,8 +47,8 @@ export const ResetPasswordForm: React.FC = () => {
         // Automatically log the user in after they successfully reset password
         await login({ email: json.user.email, password: data.password })
 
-        // Redirect them to `/account` with success message in URL
-        router.push('/account?success=Password reset successfully.')
+        // Redirect them to `/dashboard` with success message in URL
+        router.push('/dashboard?success=Password reset successfully.')
       } else {
         setError('There was a problem while resetting your password. Please try again later.')
       }
@@ -65,8 +63,8 @@ export const ResetPasswordForm: React.FC = () => {
   }, [reset, token])
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-      <Message error={error} className={classes.message} />
+    <form onSubmit={handleSubmit(onSubmit)} className="max-w-md">
+      <Message error={error} />
       <Input
         name="password"
         type="password"
@@ -76,12 +74,7 @@ export const ResetPasswordForm: React.FC = () => {
         error={errors.password}
       />
       <input type="hidden" {...register('token')} />
-      <Button
-        type="submit"
-        className={classes.submit}
-        label="Reset Password"
-        appearance="primary"
-      />
+      <Button type="submit" label="Reset Password" appearance="primary" />
     </form>
   )
 }

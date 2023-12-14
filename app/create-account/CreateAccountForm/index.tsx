@@ -10,8 +10,6 @@ import { Input } from '../../_components/Input'
 import { Message } from '../../_components/Message'
 import { useAuth } from '../../_providers/Auth'
 
-import classes from './index.module.scss'
-
 type FormData = {
   email: string
   password: string
@@ -62,7 +60,7 @@ export const CreateAccountForm: React.FC = () => {
         await login(data)
         clearTimeout(timer)
         if (redirect) router.push(redirect as string)
-        else router.push(`/account?success=${encodeURIComponent('Account created successfully')}`)
+        else router.push(`/dashboard?success=${encodeURIComponent('Account created successfully')}`)
       } catch (_) {
         clearTimeout(timer)
         setError('There was an error with the credentials provided. Please try again.')
@@ -72,49 +70,61 @@ export const CreateAccountForm: React.FC = () => {
   )
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+    <form onSubmit={handleSubmit(onSubmit)} className="max-w-md">
       <p>
         {`This is where new customers can signup and create a new account. To manage all users, `}
-        <Link href={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/admin/collections/users`}>
+        <Link
+          href={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/admin/collections/users`}
+          className="font-medium underline"
+        >
           login to the admin dashboard
         </Link>
         {'.'}
       </p>
-      <Message error={error} className={classes.message} />
-      <Input
-        name="email"
-        label="Email Address"
-        required
-        register={register}
-        error={errors.email}
-        type="email"
-      />
-      <Input
-        name="password"
-        type="password"
-        label="Password"
-        required
-        register={register}
-        error={errors.password}
-      />
-      <Input
-        name="passwordConfirm"
-        type="password"
-        label="Confirm Password"
-        required
-        register={register}
-        validate={value => value === password.current || 'The passwords do not match'}
-        error={errors.passwordConfirm}
-      />
-      <Button
-        type="submit"
-        className={classes.submit}
-        label={loading ? 'Processing' : 'Create Account'}
-        appearance="primary"
-      />
-      <div>
+      <Message error={error} />
+      <div className="mt-6">
+        <Input
+          name="email"
+          label="Email Address"
+          required
+          register={register}
+          error={errors.email}
+          type="email"
+        />
+      </div>
+      <div className="mt-4">
+        <Input
+          name="password"
+          type="password"
+          label="Password"
+          required
+          register={register}
+          error={errors.password}
+        />
+      </div>
+      <div className="mt-4">
+        <Input
+          name="passwordConfirm"
+          type="password"
+          label="Confirm Password"
+          required
+          register={register}
+          validate={value => value === password.current || 'The passwords do not match'}
+          error={errors.passwordConfirm}
+        />
+      </div>
+      <div className="mt-4">
+        <Button
+          type="submit"
+          label={loading ? 'Processing' : 'Create Account'}
+          appearance="primary"
+        />
+      </div>
+      <div className="mt-6">
         {'Already have an account? '}
-        <Link href={`/login${allParams}`}>Login</Link>
+        <Link href={`/login${allParams}`} className="font-medium underline">
+          Login
+        </Link>
       </div>
     </form>
   )

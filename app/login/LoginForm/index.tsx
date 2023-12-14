@@ -10,8 +10,6 @@ import { Input } from '../../_components/Input'
 import { Message } from '../../_components/Message'
 import { useAuth } from '../../_providers/Auth'
 
-import classes from './index.module.scss'
-
 type FormData = {
   email: string
   password: string
@@ -31,8 +29,8 @@ export const LoginForm: React.FC = () => {
     formState: { errors, isLoading },
   } = useForm<FormData>({
     defaultValues: {
-      email: 'demo@payloadcms.com',
-      password: 'demo',
+      email: 'admin@admin.com',
+      password: 'admin',
     },
   })
 
@@ -41,7 +39,7 @@ export const LoginForm: React.FC = () => {
       try {
         await login(data)
         if (redirect?.current) router.push(redirect.current as string)
-        else router.push('/account')
+        else router.push('/dashboard')
       } catch (_) {
         setError('There was an error with the credentials provided. Please try again.')
       }
@@ -50,46 +48,57 @@ export const LoginForm: React.FC = () => {
   )
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
+    <form onSubmit={handleSubmit(onSubmit)} className="max-w-md">
       <p>
-        {'To log in, use the email '}
-        <b>demo@payloadcms.com</b>
-        {' with the password '}
-        <b>demo</b>
-        {'. To manage your users, '}
-        <Link href={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/admin/collections/users`}>
+        To log in, use the email <b>admin@admin.com</b> with the password <b>admin</b>. To manage
+        your users,{' '}
+        <Link
+          href={`${process.env.NEXT_PUBLIC_PAYLOAD_URL}/admin/collections/users`}
+          className="font-medium underline"
+        >
           login to the admin dashboard
         </Link>
         .
       </p>
-      <Message error={error} className={classes.message} />
-      <Input
-        name="email"
-        label="Email Address"
-        required
-        register={register}
-        error={errors.email}
-        type="email"
-      />
-      <Input
-        name="password"
-        type="password"
-        label="Password"
-        required
-        register={register}
-        error={errors.password}
-      />
-      <Button
-        type="submit"
-        disabled={isLoading}
-        className={classes.submit}
-        label={isLoading ? 'Processing' : 'Login'}
-        appearance="primary"
-      />
-      <div>
-        <Link href={`/create-account${allParams}`}>Create an account</Link>
+      <div className="mt-6">
+        <Message error={error} />
+      </div>
+      <div className="mt-6">
+        <Input
+          name="email"
+          label="Email Address"
+          required
+          register={register}
+          error={errors.email}
+          type="email"
+        />
+      </div>
+      <div className="mt-4">
+        <Input
+          name="password"
+          type="password"
+          label="Password"
+          required
+          register={register}
+          error={errors.password}
+        />
+      </div>
+      <div className="mt-4">
+        <Button
+          type="submit"
+          disabled={isLoading}
+          label={isLoading ? 'Processing' : 'Login'}
+          appearance="primary"
+        />
+      </div>
+      <div className="mt-6">
+        <Link href={`/create-account${allParams}`} className="font-medium underline">
+          Create an account
+        </Link>
         <br />
-        <Link href={`/recover-password${allParams}`}>Recover your password</Link>
+        <Link href={`/recover-password${allParams}`} className="font-medium underline">
+          Recover your password
+        </Link>
       </div>
     </form>
   )

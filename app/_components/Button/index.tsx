@@ -1,9 +1,8 @@
 'use client'
 
 import React, { ElementType } from 'react'
+import clsx from 'clsx'
 import Link from 'next/link'
-
-import classes from './index.module.scss'
 
 export type Props = {
   label?: string
@@ -15,7 +14,6 @@ export type Props = {
   className?: string
   type?: 'submit' | 'button'
   disabled?: boolean
-  invert?: boolean
 }
 
 export const Button: React.FC<Props> = ({
@@ -24,35 +22,41 @@ export const Button: React.FC<Props> = ({
   newTab,
   href,
   appearance,
-  className: classNameFromProps,
+  className,
   onClick,
   type = 'button',
   disabled,
-  invert,
 }) => {
   let el = elFromProps
   const newTabProps = newTab ? { target: '_blank', rel: 'noopener noreferrer' } : {}
 
-  const className = [
-    classes.button,
-    classNameFromProps,
-    classes[`appearance--${appearance}`],
-    invert && classes[`${appearance}--invert`],
-  ]
-    .filter(Boolean)
-    .join(' ')
-
   const content = (
-    <div className={classes.content}>
-      <span className={classes.label}>{label}</span>
-    </div>
+    <span
+      className={clsx(
+        appearance === 'secondary' && 'text-gray-900',
+        appearance === 'default' && 'text-gray-900',
+      )}
+    >
+      {label}
+    </span>
   )
 
   if (onClick || type === 'submit') el = 'button'
 
   if (el === 'link') {
     return (
-      <Link href={href || ''} className={className} {...newTabProps} onClick={onClick}>
+      <Link
+        href={href || ''}
+        className={clsx(
+          'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
+          appearance === 'primary' && 'bg-indigo-600 hover:bg-indigo-500',
+          appearance === 'secondary' && 'bg-white hover:bg-gray-100 text-gray-900',
+          appearance === 'default' && 'bg-white hover:bg-gray-100 text-gray-900',
+          className,
+        )}
+        {...newTabProps}
+        onClick={onClick}
+      >
         {content}
       </Link>
     )
@@ -63,7 +67,13 @@ export const Button: React.FC<Props> = ({
   return (
     <Element
       href={href}
-      className={className}
+      className={clsx(
+        'rounded-md bg-indigo-600 px-3 py-2 text-sm font-semibold text-white shadow-sm hover:bg-indigo-500 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600',
+        appearance === 'primary' && 'bg-indigo-600 hover:bg-indigo-500',
+        appearance === 'secondary' && 'bg-white hover:bg-gray-100 text-gray-900',
+        appearance === 'default' && 'bg-white hover:bg-gray-100 text-gray-900',
+        className,
+      )}
       type={type}
       {...newTabProps}
       onClick={onClick}

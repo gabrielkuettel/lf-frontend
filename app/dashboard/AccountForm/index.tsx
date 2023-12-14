@@ -9,8 +9,6 @@ import { Input } from '../../_components/Input'
 import { Message } from '../../_components/Message'
 import { useAuth } from '../../_providers/Auth'
 
-import classes from './index.module.scss'
-
 type FormData = {
   email: string
   name: string
@@ -88,29 +86,31 @@ export const AccountForm: React.FC = () => {
   }, [user, router, reset, changePassword])
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)} className={classes.form}>
-      <Message error={error} success={success} className={classes.message} />
+    <form onSubmit={handleSubmit(onSubmit)} className="max-w-md">
+      <Message error={error} success={success} />
       {!changePassword ? (
         <Fragment>
           <p>
             {'To change your password, '}
             <button
               type="button"
-              className={classes.changePassword}
               onClick={() => setChangePassword(!changePassword)}
+              className="font-medium underline"
             >
               click here
             </button>
             .
           </p>
-          <Input
-            name="email"
-            label="Email Address"
-            required
-            register={register}
-            error={errors.email}
-            type="email"
-          />
+          <div className="mt-6">
+            <Input
+              name="email"
+              label="Email Address"
+              required
+              register={register}
+              error={errors.email}
+              type="email"
+            />
+          </div>
         </Fragment>
       ) : (
         <Fragment>
@@ -118,37 +118,41 @@ export const AccountForm: React.FC = () => {
             {'Change your password below, or '}
             <button
               type="button"
-              className={classes.changePassword}
               onClick={() => setChangePassword(!changePassword)}
+              className="font-medium underline"
             >
               cancel
             </button>
             .
           </p>
-          <Input
-            name="password"
-            type="password"
-            label="Password"
-            required
-            register={register}
-            error={errors.password}
-          />
-          <Input
-            name="passwordConfirm"
-            type="password"
-            label="Confirm Password"
-            required
-            register={register}
-            validate={value => value === password.current || 'The passwords do not match'}
-            error={errors.passwordConfirm}
-          />
+          <div className="mt-6">
+            <Input
+              name="password"
+              type="password"
+              label="Password"
+              required
+              register={register}
+              error={errors.password}
+            />
+          </div>
+          <div className="mt-4">
+            <Input
+              name="passwordConfirm"
+              type="password"
+              label="Confirm Password"
+              required
+              register={register}
+              validate={value => value === password.current || 'The passwords do not match'}
+              error={errors.passwordConfirm}
+            />
+          </div>
         </Fragment>
       )}
       <Button
         type="submit"
-        className={classes.submit}
         label={isLoading ? 'Processing' : changePassword ? 'Change password' : 'Update account'}
         appearance="primary"
+        className="my-4"
       />
     </form>
   )

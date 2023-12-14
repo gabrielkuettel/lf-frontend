@@ -1,7 +1,8 @@
+'use client'
+
 import React from 'react'
 import { FieldValues, UseFormRegister, Validate } from 'react-hook-form'
-
-import classes from './index.module.scss'
+import clsx from 'clsx'
 
 type Props = {
   name: string
@@ -23,12 +24,15 @@ export const Input: React.FC<Props> = ({
   validate,
 }) => {
   return (
-    <div className={classes.inputWrap}>
-      <label htmlFor="name" className={classes.label}>
+    <>
+      <label htmlFor="name" className="block text-sm font-medium leading-6 text-gray-900">
         {`${label} ${required ? '*' : ''}`}
       </label>
       <input
-        className={[classes.input, error && classes.error].filter(Boolean).join(' ')}
+        className={clsx(
+          'block w-full rounded-md border-0 py-1.5 pl-2 text-gray-900 shadow-sm ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 focus:ring-2 focus:ring-inset focus:ring-indigo-600 sm:text-sm sm:leading-6',
+          error && 'ring-2 ring-red-500 focus:ring-red-600 active:ring-red-600',
+        )}
         {...{ type }}
         {...register(name, {
           required,
@@ -44,12 +48,12 @@ export const Input: React.FC<Props> = ({
         })}
       />
       {error && (
-        <div className={classes.errorMessage}>
+        <div className="text-red-600 text-xs">
           {!error?.message && error?.type === 'required'
             ? 'This field is required'
             : error?.message}
         </div>
       )}
-    </div>
+    </>
   )
 }

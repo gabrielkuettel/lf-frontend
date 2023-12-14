@@ -30,9 +30,13 @@ export const LogoutPage: React.FC = props => {
           <h1>{error || success}</h1>
           <p>
             {'What would you like to do next? '}
-            <Link href="/">Click here</Link>
+            <Link href="/" className="font-medium underline">
+              Click here
+            </Link>
             {` to go to the home page. To log back in, `}
-            <Link href="/login">click here</Link>
+            <Link href="/login" className="font-medium underline">
+              click here
+            </Link>
             {'.'}
           </p>
         </div>

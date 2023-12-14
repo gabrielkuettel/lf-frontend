@@ -1,14 +1,16 @@
 import React from 'react'
 
-import { Gutter } from '../_components/Gutter'
 import { RecoverPasswordForm } from './RecoverPasswordForm'
-
-import classes from './index.module.scss'
 
 export default async function RecoverPassword() {
   return (
-    <Gutter className={classes.recoverPassword}>
-      <RecoverPasswordForm />
-    </Gutter>
+    <>
+      <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        Recover Password
+      </h1>
+      <div className="mt-6">
+        <RecoverPasswordForm />
+      </div>
+    </>
   )
 }

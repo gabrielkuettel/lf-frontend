@@ -1,16 +1,15 @@
 import React from 'react'
 
-import { Gutter } from '../_components/Gutter'
 import { ResetPasswordForm } from './ResetPasswordForm'
-
-import classes from './index.module.scss'
 
 export default async function ResetPassword() {
   return (
-    <Gutter className={classes.resetPassword}>
-      <h1>Reset Password</h1>
+    <>
+      <h1 className="mt-2 text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">
+        Reset Password
+      </h1>
       <p>Please enter a new password below.</p>
       <ResetPasswordForm />
-    </Gutter>
+    </>
   )
 }
